@@ -25,6 +25,54 @@ public class Matiére {
 	@Column(length = 500)
 	private String description;
 	
+	@Column
+	private float coefficient;
+	
+	@Column
+	private float moyenne;
+	
+	@Column
+	private String ponderation;
+	
+
+	public Matiére(Integer matiereId, String nom, String description, float coefficient, float moyenne,
+			String ponderation, List<Examen> exams, Enseignant enseignant, Section section) {
+		super();
+		this.matiereId = matiereId;
+		this.nom = nom;
+		this.description = description;
+		this.coefficient = coefficient;
+		this.moyenne = moyenne;
+		this.ponderation = ponderation;
+		this.exams = exams;
+		this.enseignant = enseignant;
+		this.section = section;
+	}
+
+	public float getCoefficient() {
+		return coefficient;
+	}
+
+	public void setCoefficient(float coefficient) {
+		this.coefficient = coefficient;
+	}
+
+	public float getMoyenne() {
+		return moyenne;
+	}
+
+	public void setMoyenne(float moyenne) {
+		this.moyenne = moyenne;
+	}
+
+	public String getPonderation() {
+		return ponderation;
+	}
+
+	public void setPonderation(String ponderation) {
+		this.ponderation = ponderation;
+	}
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "matiere", cascade = CascadeType.ALL)
 	private List<Examen> exams;
@@ -37,26 +85,6 @@ public class Matiére {
 	@JoinColumn(name = "idSection", nullable = false)
 	private Section section;
 
-	
-
-	public Matiére(String nom, String description, Enseignant enseignant, Section section) {
-		super();
-		this.nom = nom;
-		this.description = description;
-		this.enseignant = enseignant;
-		this.section = section;
-	}
-
-	public Matiére(Integer matiereId, String nom, String description, List<Examen> exams, Enseignant enseignant,
-			Section section) {
-		super();
-		this.matiereId = matiereId;
-		this.nom = nom;
-		this.description = description;
-		this.exams = exams;
-		this.enseignant = enseignant;
-		this.section = section;
-	}
 
 	public String getNom() {
 		return nom;
@@ -82,14 +110,7 @@ public class Matiére {
 		this.enseignant = enseignant;
 	}
 
-	public Section getSection() {
-		return section;
-	}
-
-	public void setSection(Section section) {
-		this.section = section;
-	}
-
+	
 	public Matiére(Integer matiereId, List<Examen> exams) {
 		super();
 		this.matiereId = matiereId;
@@ -98,6 +119,14 @@ public class Matiére {
 
 	public List<Examen> getExams() {
 		return exams;
+	}
+
+	public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
 	}
 
 	public void setExams(List<Examen> exams) {
