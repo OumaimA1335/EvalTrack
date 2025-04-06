@@ -2,6 +2,8 @@ package com.EvalTrack.Services;
 
 import com.EvalTrack.Entities.Module;
 import com.EvalTrack.Repositories.ModuleRepository;
+import com.EvalTrack.Repositories.SectionRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class ModuleService {
 
     @Autowired
     private ModuleRepository moduleRepository;
+    @Autowired
+    private SectionRepository  sectionRepository;
 
     public List<Module> getAllModules() {
         return moduleRepository.findAll();
@@ -23,6 +27,16 @@ public class ModuleService {
     }
 
     public Module addModule(Module module) {
+    	Module mod = new Module();
+    	mod.setMoyenne(module.getMoyenne());
+    	mod.setNomModule(module.getNomModule());
+    	if (module.getSection() != null) {
+            com.EvalTrack.Entities.Section section = sectionRepository.findById(module.getSection().getIdSection()).orElse(null);
+            mod.setSection(section);
+        } else {
+        	mod.setSection(null);
+        }
+
         return moduleRepository.save(module);
     }
 
@@ -30,6 +44,12 @@ public class ModuleService {
         return moduleRepository.findById(id).map(module -> {
             module.setNomModule(updatedModule.getNomModule());
             module.setMoyenne(updatedModule.getMoyenne());
+            if (updatedModule.getSection() != null) {
+                com.EvalTrack.Entities.Section section = sectionRepository.findById(module.getSection().getIdSection()).orElse(null);
+                module.setSection(section);
+            } else {
+            	module.setSection(null);
+            }
             return moduleRepository.save(module);
         }).orElse(null);
     }

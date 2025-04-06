@@ -23,7 +23,7 @@ public class Etudiant extends Utilisateur {
 	private Integer cin;
 	private Integer niveau;
 	@ManyToOne
-	@JoinColumn(name = "SectionId", nullable = true)//pour le moment l'id est nulle jusqu'a la création de section compléte
+	@JoinColumn(name = "SectionId")//pour le moment l'id est nulle jusqu'a la création de section compléte
 	private Section section;
 	
 	@JsonIgnore

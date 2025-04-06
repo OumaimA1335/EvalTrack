@@ -11,18 +11,22 @@ import com.EvalTrack.Entities.Examen;
 import com.EvalTrack.Entities.Matiére;
 import com.EvalTrack.Repositories.EtudiantRepository;
 import com.EvalTrack.Repositories.ExamenRepository;
+import com.EvalTrack.Repositories.MatiereRepository;
 
 @Service
 public class ExamenService {
 
 	private final ExamenRepository examenRepo;
 	private final EtudiantRepository etudiantRepository ;
+
+	private final MatiereRepository matiereRepository;
     
 	@Autowired
-	public ExamenService(ExamenRepository examenRepo,EtudiantRepository etudiantRepository ) {
+	public ExamenService(ExamenRepository examenRepo,EtudiantRepository etudiantRepository,MatiereRepository matiereRepository ) {
 		super();
 		this.examenRepo = examenRepo;
 		this.etudiantRepository=etudiantRepository;
+		this.matiereRepository=matiereRepository;
 	}
 	public List<Examen> getAllExams() {
         return examenRepo.findAll();
@@ -40,8 +44,8 @@ public class ExamenService {
 
           // Récupérer la matière si l'ID est fourni
           if (newExam.getMatiere() != null) {
-              //Matiére matiere = matiereRepository.findById(newExam.getMatiere()).orElse(null);
-             // exam.setMatiere(matiere);
+              Matiére matiere = matiereRepository.findById(newExam.getMatiere().getMatiereId()).orElse(null);
+             exam.setMatiere(matiere);
           } else {
               exam.setMatiere(null);
           }
@@ -79,8 +83,8 @@ public class ExamenService {
             exam.setNotes(updatedExam.getNotes());
             exam.setLienCopie(updatedExam.getLienCopie());
             if (updatedExam.getMatiere() != null) {
-                //Matiére matiere = matiereRepository.findById(newExam.getMatiere()).orElse(null);
-               // exam.setMatiere(matiere);
+                Matiére matiere = matiereRepository.findById(updatedExam.getMatiere().getMatiereId()).orElse(null);
+                exam.setMatiere(matiere);
             } else {
                 exam.setMatiere(null);
             }

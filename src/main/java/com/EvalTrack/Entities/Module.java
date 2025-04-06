@@ -3,6 +3,8 @@ package com.EvalTrack.Entities;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Module {
     
@@ -12,19 +14,28 @@ public class Module {
 
     private String nomModule;
     private float moyenne;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Matiére> listeMatieres;
 
-    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Examen> listeExams;
+    @ManyToOne
+    @JoinColumn(name = "SectionId")
+    private Section section;
 
     // Constructeurs
     public Module() {}
+    
 
-    public Module(String nomModule, float moyenne) {
+    public Module(int idModule) {
+		super();
+		this.idModule = idModule;
+	}
+
+
+	public Module(String nomModule, float moyenne,Section section) {
         this.nomModule = nomModule;
         this.moyenne = moyenne;
+        this.section=section;
     }
 
     // Getters et Setters
@@ -60,11 +71,13 @@ public class Module {
         this.listeMatieres = listeMatieres;
     }
 
-    public List<Examen> getListeExams() {
-        return listeExams;
-    }
+	public Section getSection() {
+		return section;
+	}
 
-    public void setListeExams(List<Examen> listeExams) {
-        this.listeExams = listeExams;
-    }
+	public void setSection(Section section) {
+		this.section = section;
+	}
+
+   
 }

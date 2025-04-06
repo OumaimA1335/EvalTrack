@@ -19,7 +19,7 @@ public class Matiére {
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer matiereId;
 	
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String nom;
 
 	@Column(length = 500)
@@ -33,10 +33,21 @@ public class Matiére {
 	
 	@Column
 	private String ponderation;
+	@JsonIgnore
+	@OneToMany(mappedBy = "matiere", cascade = CascadeType.ALL)
+	private List<Examen> exams;
+	
+	@ManyToOne
+	@JoinColumn(name = "enseignant_id",nullable=true)
+	private Enseignant  enseignant;
+	
+	@ManyToOne
+	@JoinColumn(name = "idModule", nullable = false)
+	private Module module;
 	
 
 	public Matiére(Integer matiereId, String nom, String description, float coefficient, float moyenne,
-			String ponderation, List<Examen> exams, Enseignant enseignant, Section section) {
+			String ponderation, List<Examen> exams, Enseignant enseignant, Module module) {
 		super();
 		this.matiereId = matiereId;
 		this.nom = nom;
@@ -46,8 +57,15 @@ public class Matiére {
 		this.ponderation = ponderation;
 		this.exams = exams;
 		this.enseignant = enseignant;
-		this.section = section;
+		this.module = module;
 	}
+	
+
+	public Matiére() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public float getCoefficient() {
 		return coefficient;
@@ -73,17 +91,7 @@ public class Matiére {
 		this.ponderation = ponderation;
 	}
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "matiere", cascade = CascadeType.ALL)
-	private List<Examen> exams;
-	
-	@ManyToOne
-	@JoinColumn(name = "enseignant_id")
-	private Enseignant  enseignant;
-	
-	@ManyToOne
-	@JoinColumn(name = "idSection", nullable = false)
-	private Section section;
+
 
 
 	public String getNom() {
@@ -121,13 +129,7 @@ public class Matiére {
 		return exams;
 	}
 
-	public Section getSection() {
-		return section;
-	}
 
-	public void setSection(Section section) {
-		this.section = section;
-	}
 
 	public void setExams(List<Examen> exams) {
 		this.exams = exams;
@@ -140,5 +142,14 @@ public class Matiére {
 	public void setMatiereId(Integer matiereId) {
 		this.matiereId = matiereId;
 	}
+
+	public Module getModule() {
+		return module;
+	}
+
+	public void setModule(Module module) {
+		this.module = module;
+	}
+	
 	
 }

@@ -23,7 +23,7 @@ public class Examen {
 
     // Relation avec Matiere (Un examen appartient à une seule matière)
     @ManyToOne
-    @JoinColumn(name = "matiereId",nullable = true) //pour le moment nulle
+    @JoinColumn(name = "matiereId") //pour le moment nulle
     private Matiére matiere;
 
     // Relation avec Etudiant (Un étudiant peut passer plusieurs examens)

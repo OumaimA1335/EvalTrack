@@ -9,65 +9,50 @@ import org.springframework.web.bind.annotation.*;
 
 import com.EvalTrack.Entities.Matiére;
 import com.EvalTrack.Repositories.MatiereRepository;
+import com.EvalTrack.Services.MatiéreService;
 
 @RestController
-@RequestMapping("/api/matieres")
+@RequestMapping("/matieres")
 public class MatiereController {
 
     @Autowired
-    private MatiereRepository matiereRepository;
+    private MatiéreService matiereservice;
 
     // Récupérer toutes les matières
     @GetMapping
     public List<Matiére> getAllMatieres() {
-        return matiereRepository.findAll();
+        return matiereservice.getAllMatieres();
     }
 
     // Récupérer une matière par ID
     @GetMapping("/{id}")
-    public ResponseEntity<Matiére> getMatiereById(@PathVariable Integer id) {
-        Optional<Matiére> matiere = matiereRepository.findById(id);
-        return matiere.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<Matiére> getMatiereById(@PathVariable Integer id) {
+        return matiereservice.getMatiereById(id);
     }
 
     // Ajouter une nouvelle matière
     @PostMapping
     public Matiére createMatiere(@RequestBody Matiére matiere) {
-        return matiereRepository.save(matiere);
+      return  matiereservice.ajouterMatiere(matiere);
     }
 
     // Modifier une matière existante
     @PutMapping("/{id}")
-    public ResponseEntity<Matiére> updateMatiere(@PathVariable Integer id, @RequestBody Matiére matiereDetails) {
-        Optional<Matiére> optionalMatiere = matiereRepository.findById(id);
-        if (optionalMatiere.isPresent()) {
-            Matiére matiere = optionalMatiere.get();
-            matiere.setNom(matiereDetails.getNom());
-            matiere.setDescription(matiereDetails.getDescription());
-            matiere.setEnseignant(matiereDetails.getEnseignant());
-            matiere.setSection(matiereDetails.getSection());
-            return ResponseEntity.ok(matiereRepository.save(matiere));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Matiére updateMatiere(@PathVariable Integer id, @RequestBody Matiére matiereDetails) {
+        return matiereservice.updateMatiere(id, matiereDetails);
     }
 
     // Supprimer une matière
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMatiere(@PathVariable Integer id) {
-        if (matiereRepository.existsById(id)) {
-            matiereRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public void deleteMatiere(@PathVariable Integer id) {
+        matiereservice.deleteMatiere(id);
     }
     
 
     // 🔹 Récupérer les matières d'un enseignant spécifique
     @GetMapping("/enseignant/{enseignantId}")
     public ResponseEntity<List<Matiére>> getMatieresByEnseignant(@PathVariable Integer enseignantId) {
-        List<Matiére> matieres = matiereRepository.findByEnseignantEnseignantId(enseignantId);
+        List<Matiére> matieres = matiereservice.getMatieresByTeachers(enseignantId);
         if (matieres.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
