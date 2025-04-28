@@ -1,8 +1,9 @@
 package com.EvalTrack.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Examen {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idExam;
     
@@ -23,79 +24,133 @@ public class Examen {
 
     // Relation avec Matiere (Un examen appartient à une seule matière)
     @ManyToOne
-    @JoinColumn(name = "matiereId",nullable = true) //pour le moment nulle
+    @JoinColumn(name = "matiereId", nullable = true)
     private Matiére matiere;
 
-    // Relation avec Etudiant (Un étudiant peut passer plusieurs examens)
-    
+    // Relation avec Etudiant
     @ManyToOne
-    @JoinColumn(name = "idEtudinat")
+    @JoinColumn(name = "idEtudiant")
     private Etudiant etudiant;
 
-	public Examen(int idExam, String typeExam, Double notes, String lienCopie, Matiére matiere, Etudiant etudiant) {
-		super();
-		this.idExam = idExam;
-		this.typeExam = typeExam;
-		this.notes = notes;
-		this.lienCopie = lienCopie;
-		this.matiere = matiere!=null? matiere :null;;
-		this.setEtudiant(etudiant);
-	}
-	
+    // ************ Ajouts demandés ************
 
-	public Examen() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    // Relation avec Section
+    @ManyToOne
+    @JoinColumn(name = "sectionId")
+    private Section section;
 
+    // Relation avec Module
+    @ManyToOne
+    @JoinColumn(name = "idModule")
+    private Module module;
 
-	public int getIdExam() {
-		return idExam;
-	}
+    // Semestre (Enum: SEMESTRE1 ou SEMESTRE2)
+    @Enumerated(EnumType.STRING)
+    private Semestre semestre;
 
-	public void setIdExam(int idExam) {
-		this.idExam = idExam;
-	}
+    // Session (Enum: PRINCIPAL ou RATTRAPAGE)
+    @Enumerated(EnumType.STRING)
+    private Session session;
 
-	public String getTypeExam() {
-		return typeExam;
-	}
+    // *******************************************
 
-	public void setTypeExam(String typeExam) {
-		this.typeExam = typeExam;
-	}
+    // Constructeurs
+    public Examen() {
+        super();
+    }
 
-	public Double getNotes() {
-		return notes;
-	}
+    public Examen(int idExam, String typeExam, Double notes, String lienCopie, Matiére matiere,
+                  Etudiant etudiant, Section section, Module module, Semestre semestre, Session session) {
+        this.idExam = idExam;
+        this.typeExam = typeExam;
+        this.notes = notes;
+        this.lienCopie = lienCopie;
+        this.matiere = matiere;
+        this.etudiant = etudiant;
+        this.section = section;
+        this.module = module;
+        this.semestre = semestre;
+        this.session = session;
+    }
 
-	public void setNotes(Double notes) {
-		this.notes = notes;
-	}
+    // Getters et Setters
+    public int getIdExam() {
+        return idExam;
+    }
 
-	public String getLienCopie() {
-		return lienCopie;
-	}
+    public void setIdExam(int idExam) {
+        this.idExam = idExam;
+    }
 
-	public void setLienCopie(String lienCopie) {
-		this.lienCopie = lienCopie;
-	}
+    public String getTypeExam() {
+        return typeExam;
+    }
 
-	public Matiére getMatiere() {
-		return matiere;
-	}
+    public void setTypeExam(String typeExam) {
+        this.typeExam = typeExam;
+    }
 
-	public void setMatiere(Matiére matiere) {
-		this.matiere = matiere;
-	}
+    public Double getNotes() {
+        return notes;
+    }
 
-	public Etudiant getEtudiant() {
-		return etudiant;
-	}
+    public void setNotes(Double notes) {
+        this.notes = notes;
+    }
 
-	public void setEtudiant(Etudiant etudiant) {
-		this.etudiant = etudiant;
-	}
-    
+    public String getLienCopie() {
+        return lienCopie;
+    }
 
+    public void setLienCopie(String lienCopie) {
+        this.lienCopie = lienCopie;
+    }
+
+    public Matiére getMatiere() {
+        return matiere;
+    }
+
+    public void setMatiere(Matiére matiere) {
+        this.matiere = matiere;
+    }
+
+    public Etudiant getEtudiant() {
+        return etudiant;
+    }
+
+    public void setEtudiant(Etudiant etudiant) {
+        this.etudiant = etudiant;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 }
