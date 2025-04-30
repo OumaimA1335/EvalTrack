@@ -7,6 +7,8 @@ import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,36 +17,44 @@ import jakarta.persistence.FetchType;
 public class Section {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private Integer SectionId;
+	private Integer sectionId;
 
 	  private String nomSection;
 	  private int semestre;
-
+        
+	    @JsonIgnore
 	    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	    private List<Etudiant> listeEtudiants;
-
+	    @JsonIgnore
 	    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	    private List<Module> listeModules;
 
 	    public Section() {}
+	    
 
-	    public Section(String nomSection, int semestre) {
+	    public Section(Integer sectionId) {
+			super();
+			this.sectionId = sectionId;
+		}
+
+
+		public Section(String nomSection, int semestre) {
 	        this.nomSection = nomSection;
 	        this.semestre = semestre;
 	    }
 
 	    public int getIdSection() {
-	        return SectionId;
+	        return sectionId;
 	    }
 
 	    public void setIdSection(int idSection) {
-	        this.SectionId = idSection;
+	        this.sectionId = idSection;
 	    }
 
 	    public Section(Integer sectionId, String nomSection, int semestre, List<Etudiant> listeEtudiants,
 				List<Module> listeModules) {
 			super();
-			SectionId = sectionId;
+			sectionId = sectionId;
 			this.nomSection = nomSection;
 			this.semestre = semestre;
 			this.listeEtudiants = listeEtudiants;

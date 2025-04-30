@@ -12,6 +12,9 @@ import com.EvalTrack.Entities.Etudiant;
 
 public interface EtudiantRepository extends JpaRepository <Etudiant,Long> {
 	 Optional<Etudiant> findByEmail(String email);
+	 List<Etudiant> findBySection_SectionIdAndNiveau(Long sectionId, int niveau);
+
+
 	              
 	 List<Etudiant> findAll();
 }

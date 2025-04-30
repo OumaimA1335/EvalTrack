@@ -1,9 +1,11 @@
 package com.EvalTrack.Controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,17 +51,17 @@ public class AdministrateurController {
 	
 	@PostMapping("/LoginAdmin")
 	@ResponseBody
-	public ResponseEntity<String> loginAdmin(
-	        @RequestBody Administrateur admin) {
+	
+	public ResponseEntity<?> loginAdmin(@RequestBody Administrateur adminRequest) {
+	    Map<String, Object> authResult = adminService.login(adminRequest.getEmail(), adminRequest.getMotDePasse());
 
-	    String isAuthenticated = adminService.login(admin.getEmail(),admin.getMotDePasse());
-
-	    if (isAuthenticated != null) {
-	        return ResponseEntity.ok("Connexion réussie !");
+	    if (authResult != null) {
+	        return ResponseEntity.ok(authResult); // Renvoie token + idRole dans un JSON
 	    } else {
-	        return ResponseEntity.status(401).body("Email ou mot de passe incorrect.");
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou mot de passe incorrect.");
 	    }
 	}
+
 	  @GetMapping
 	    public List<Administrateur> getAllAdmins() {
 	        return adminService.getAllAdmins();

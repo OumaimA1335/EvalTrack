@@ -3,11 +3,13 @@ package com.EvalTrack.Entities;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class Utilisateur {
 	private String nom;
+	@Column(unique = true, nullable = false)
 	private String email;
 	private String motDePasse;
 	public Utilisateur( String nom, String email, String motDePasse) {

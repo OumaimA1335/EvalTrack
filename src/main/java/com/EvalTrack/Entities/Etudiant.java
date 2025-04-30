@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Etudiant extends Utilisateur {
@@ -23,18 +24,24 @@ public class Etudiant extends Utilisateur {
 	private Integer cin;
 	private Integer niveau;
 	@ManyToOne
-	@JoinColumn(name = "SectionId")//pour le moment l'id est nulle jusqu'a la création de section compléte
+	@JoinColumn(name = "sectionId")
 	private Section section;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
 	private List<Examen> exams;
-	public Etudiant(String nom, String email, String motDePasse, Integer cin, Integer niveau, Section section, List<Examen> exams) {
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "id_role", referencedColumnName = "idRole")
+    private Role role;
+	
+	public Etudiant(String nom, String email, String motDePasse, Integer cin, Integer niveau, Section section, List<Examen> exams, Role role) {
 		super(nom != null ? nom : "", email != null ? email : "", motDePasse != null ? motDePasse : "");
 		this.cin= cin !=null? cin:0;
 		this.niveau = niveau!=null ? niveau :0;
 		this.section = section !=null? section :null;
 		this.exams = exams;
+		this.role=role;
 	}
 	
 	public Etudiant() {
@@ -42,6 +49,22 @@ public class Etudiant extends Utilisateur {
 		
 	}
 	
+
+	public Long getIdEtudinat() {
+		return idEtudinat;
+	}
+
+	public void setIdEtudinat(Long idEtudinat) {
+		this.idEtudinat = idEtudinat;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 	public Etudiant( Long id) {
 		super();

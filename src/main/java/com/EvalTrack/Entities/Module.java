@@ -19,7 +19,7 @@ public class Module {
     private List<Matiére> listeMatieres;
 
     @ManyToOne
-    @JoinColumn(name = "SectionId")
+    @JoinColumn(name = "sectionId")
     private Section section;
 
     // Constructeurs
