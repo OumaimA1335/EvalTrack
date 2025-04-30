@@ -143,6 +143,11 @@ public class EtudiantService {
 		        }
 		    }
 		}
+		
+		public Optional<Etudiant> findEtudiantByCin(Integer Cin)
+		{
+			return etudiantRepository.findByCin(Cin);
+		}
 
 
 

@@ -14,6 +14,7 @@ public class Module {
 
     private String nomModule;
     private float moyenne;
+    private int semestre;
     @JsonIgnore
     @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Matiére> listeMatieres;
@@ -32,10 +33,11 @@ public class Module {
 	}
 
 
-	public Module(String nomModule, float moyenne,Section section) {
+	public Module(String nomModule, float moyenne,Section section,int semestre) {
         this.nomModule = nomModule;
         this.moyenne = moyenne;
         this.section=section;
+        this.semestre=semestre;
     }
 
     // Getters et Setters
@@ -77,6 +79,16 @@ public class Module {
 
 	public void setSection(Section section) {
 		this.section = section;
+	}
+
+
+	public int getSemestre() {
+		return semestre;
+	}
+
+
+	public void setSemestre(int semestre) {
+		this.semestre = semestre;
 	}
 
    

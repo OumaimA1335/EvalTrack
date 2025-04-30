@@ -12,6 +12,7 @@ import com.EvalTrack.Entities.Module;
 public interface ModuleRepository extends JpaRepository<Module, Integer> {
 
     Optional<Module> findByNomModule(String nomModule);
+    List<Module> findBySection_SectionIdAndSemestre(Long idModule, Long semstre);
 
     List<Module> findAll();
 }

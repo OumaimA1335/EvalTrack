@@ -67,6 +67,12 @@ public class Matiére {
 	}
 
 
+	public Matiére(Integer matiereId) {
+		super();
+		this.matiereId = matiereId;
+	}
+
+
 	public float getCoefficient() {
 		return coefficient;
 	}

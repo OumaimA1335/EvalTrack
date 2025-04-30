@@ -20,6 +20,7 @@ public class Examen {
     private Double notes;
 
     private String lienCopie;
+    private String session;
 
     // Relation avec Matiere (Un examen appartient à une seule matière)
     @ManyToOne
@@ -32,13 +33,14 @@ public class Examen {
     @JoinColumn(name = "idEtudinat")
     private Etudiant etudiant;
 
-	public Examen(int idExam, String typeExam, Double notes, String lienCopie, Matiére matiere, Etudiant etudiant) {
+	public Examen(int idExam, String typeExam, Double notes, String lienCopie, Matiére matiere, Etudiant etudiant,String session) {
 		super();
 		this.idExam = idExam;
 		this.typeExam = typeExam;
 		this.notes = notes;
 		this.lienCopie = lienCopie;
 		this.matiere = matiere!=null? matiere :null;;
+		this.session=session;
 		this.setEtudiant(etudiant);
 	}
 	
@@ -96,6 +98,17 @@ public class Examen {
 	public void setEtudiant(Etudiant etudiant) {
 		this.etudiant = etudiant;
 	}
+
+
+	public String getSession() {
+		return session;
+	}
+
+
+	public void setSession(String session) {
+		this.session = session;
+	}
+	
     
 
 }

@@ -30,7 +30,7 @@ public class Etudiant extends Utilisateur {
 	@JsonIgnore
 	@OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
 	private List<Examen> exams;
-	@JsonIgnore
+
 	@ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "idRole")
     private Role role;
@@ -49,6 +49,11 @@ public class Etudiant extends Utilisateur {
 		
 	}
 	
+
+	public Etudiant( Integer cin) {
+		super();
+		this.cin = cin;
+	}
 
 	public Long getIdEtudinat() {
 		return idEtudinat;

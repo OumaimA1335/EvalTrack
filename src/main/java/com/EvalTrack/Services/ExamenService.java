@@ -41,7 +41,7 @@ public class ExamenService {
           exam.setTypeExam(newExam.getTypeExam());
           exam.setNotes(newExam.getNotes());
           exam.setLienCopie(newExam.getLienCopie());
-
+          exam.setSession(newExam.getSession());
           // Récupérer la matière si l'ID est fourni
           if (newExam.getMatiere() != null) {
               Matiére matiere = matiereRepository.findById(newExam.getMatiere().getMatiereId()).orElse(null);
@@ -52,7 +52,7 @@ public class ExamenService {
 
           // Récupérer l'étudiant si l'ID est fourni
           if (newExam.getEtudiant() != null) {
-              Etudiant etudiant = etudiantRepository.findById(newExam.getEtudiant().getId()).orElse(null);
+              Etudiant etudiant = etudiantRepository.findByCin(newExam.getEtudiant().getCin()).orElse(null);
               exam.setEtudiant(etudiant);
           } else {
               exam.setEtudiant(null);
@@ -82,6 +82,7 @@ public class ExamenService {
             exam.setTypeExam(updatedExam.getTypeExam());
             exam.setNotes(updatedExam.getNotes());
             exam.setLienCopie(updatedExam.getLienCopie());
+            exam.setSession(updatedExam.getSession());
             if (updatedExam.getMatiere() != null) {
                 Matiére matiere = matiereRepository.findById(updatedExam.getMatiere().getMatiereId()).orElse(null);
                 exam.setMatiere(matiere);

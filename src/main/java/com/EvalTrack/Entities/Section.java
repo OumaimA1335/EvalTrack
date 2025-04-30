@@ -20,7 +20,7 @@ public class Section {
 	private Integer sectionId;
 
 	  private String nomSection;
-	  private int semestre;
+	 
         
 	    @JsonIgnore
 	    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -38,9 +38,9 @@ public class Section {
 		}
 
 
-		public Section(String nomSection, int semestre) {
+		public Section(String nomSection) {
 	        this.nomSection = nomSection;
-	        this.semestre = semestre;
+	      
 	    }
 
 	    public int getIdSection() {
@@ -56,7 +56,7 @@ public class Section {
 			super();
 			sectionId = sectionId;
 			this.nomSection = nomSection;
-			this.semestre = semestre;
+		
 			this.listeEtudiants = listeEtudiants;
 			this.listeModules = listeModules;
 		}
@@ -69,13 +69,8 @@ public class Section {
 	        this.nomSection = nomSection;
 	    }
 
-	    public int getSemestre() {
-	        return semestre;
-	    }
-
-	    public void setSemestre(int semestre) {
-	        this.semestre = semestre;
-	    }
+	  
+	  
 
 	    public List<Etudiant> getListeEtudiants() {
 	        return listeEtudiants;

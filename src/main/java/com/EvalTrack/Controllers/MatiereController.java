@@ -48,6 +48,11 @@ public class MatiereController {
         matiereservice.deleteMatiere(id);
     }
     
+    @GetMapping("/module/{idModule}")
+    public List<Matiére> getMatiereByIdModule(@PathVariable Integer idModule) {
+        return  matiereservice.getMatiereByIdModule(idModule);
+    }
+    
 
     // 🔹 Récupérer les matières d'un enseignant spécifique
     @GetMapping("/enseignant/{enseignantId}")

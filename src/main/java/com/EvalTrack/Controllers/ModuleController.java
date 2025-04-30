@@ -39,4 +39,9 @@ public class ModuleController {
     public void deleteModule(@PathVariable int id) {
         moduleService.deleteModule(id);
     }
+    @GetMapping("/by-section/{idSection}/{semestre}")
+    public List<Module> getModulesBySectionAndSemestre(@PathVariable Long idSection, @PathVariable Long semestre) {
+        return moduleService.getlistModule(idSection, semestre);
+    }
+
 }

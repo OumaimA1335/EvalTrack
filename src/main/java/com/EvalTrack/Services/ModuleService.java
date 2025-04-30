@@ -30,6 +30,7 @@ public class ModuleService {
     	Module mod = new Module();
     	mod.setMoyenne(module.getMoyenne());
     	mod.setNomModule(module.getNomModule());
+    	mod.setSemestre(module.getSemestre());
     	if (module.getSection() != null) {
             com.EvalTrack.Entities.Section section = sectionRepository.findById(module.getSection().getIdSection()).orElse(null);
             mod.setSection(section);
@@ -44,6 +45,7 @@ public class ModuleService {
         return moduleRepository.findById(id).map(module -> {
             module.setNomModule(updatedModule.getNomModule());
             module.setMoyenne(updatedModule.getMoyenne());
+        	module.setSemestre(updatedModule.getSemestre());
             if (updatedModule.getSection() != null) {
                 com.EvalTrack.Entities.Section section = sectionRepository.findById(module.getSection().getIdSection()).orElse(null);
                 module.setSection(section);
@@ -56,5 +58,10 @@ public class ModuleService {
 
     public void deleteModule(int id) {
         moduleRepository.deleteById(id);
+    }
+    
+    public List <Module> getlistModule(Long idSection,Long semestre)
+    {
+    	return moduleRepository.findBySection_SectionIdAndSemestre(idSection,semestre);
     }
 }

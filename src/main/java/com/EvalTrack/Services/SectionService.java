@@ -29,7 +29,6 @@ public class SectionService {
     public Section updateSection(int id, Section updatedSection) {
         return sectionRepository.findById(id).map(section -> {
             section.setNomSection(updatedSection.getNomSection());
-            section.setSemestre(updatedSection.getSemestre());
             return sectionRepository.save(section);
         }).orElse(null);
     }

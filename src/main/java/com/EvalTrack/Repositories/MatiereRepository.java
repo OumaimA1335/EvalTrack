@@ -10,4 +10,5 @@ import com.EvalTrack.Entities.Matiére;
 public interface MatiereRepository extends JpaRepository<Matiére, Integer> {
     Matiére findByNom(String nom);
     List<Matiére> findByEnseignantEnseignantId(Integer enseignantId);
+    List<Matiére> findByModule_IdModule(Integer idModule);
 }

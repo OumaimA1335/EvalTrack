@@ -94,4 +94,8 @@ public class MatiéreService {
             return matiereRepository.findByEnseignantEnseignantId(id);
 
     }
+    public List<Matiére> getMatiereByIdModule(Integer idModule)
+    {
+    	return matiereRepository.findByModule_IdModule(idModule);
+    }
 }
