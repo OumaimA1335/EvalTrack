@@ -58,10 +58,11 @@ public class AdministrateurService {
 	        if (passwordEncoder.matches(password, admin.getMotDePasse())) {
 	            String token = jwtS.generateToken(email);
 	            Long idRole = admin.getRole().getIdRole();
-
+                Integer idAdmin = admin.getId();
 	            Map<String, Object> result = new HashMap<>();
 	            result.put("token", token);
 	            result.put("idRole", idRole);
+	            result.put("idUser", idAdmin);
 	            return result;
 	        }
 	    }

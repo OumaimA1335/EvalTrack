@@ -29,6 +29,13 @@ public class SectionService {
     public Section updateSection(int id, Section updatedSection) {
         return sectionRepository.findById(id).map(section -> {
             section.setNomSection(updatedSection.getNomSection());
+          
+            return sectionRepository.save(section);
+        }).orElse(null);
+    }
+    public Section updateSemestre(int id, Section updatedSection) {
+        return sectionRepository.findById(id).map(section -> {
+            section.setNomSection(section.getNomSection());
             return sectionRepository.save(section);
         }).orElse(null);
     }

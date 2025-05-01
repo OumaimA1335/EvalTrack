@@ -74,10 +74,12 @@ public class EtudiantService {
 		        if (passwordEncoder.matches(password, etudiant.getMotDePasse())) {
 		            String token = jwtS.generateToken(email);
 		            Long idRole = etudiant.getRole().getIdRole();
+		            Long idEtudiant =etudiant.getId();
 
 		            Map<String, Object> result = new HashMap<>();
 		            result.put("token", token);
 		            result.put("idRole", idRole);
+		            result.put("idUser", idEtudiant);
 		            return result;
 		        }
 		    }

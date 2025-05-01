@@ -18,8 +18,8 @@ public class Section {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private Integer sectionId;
-
-	  private String nomSection;
+	private String nomSection;
+	
 	 
         
 	    @JsonIgnore
@@ -38,8 +38,9 @@ public class Section {
 		}
 
 
-		public Section(String nomSection) {
+		public Section(String nomSection,Integer semestre) {
 	        this.nomSection = nomSection;
+	       
 	      
 	    }
 
@@ -87,5 +88,8 @@ public class Section {
 	    public void setListeModules(List<Module> listeModules) {
 	        this.listeModules = listeModules;
 	    }
+
+
+	    
 	}
 

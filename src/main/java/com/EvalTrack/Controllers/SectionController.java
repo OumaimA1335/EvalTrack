@@ -35,6 +35,10 @@ public class SectionController {
     public Section updateSection(@PathVariable int id, @RequestBody Section updatedSection) {
         return sectionService.updateSection(id, updatedSection);
     }
+    @PutMapping("/updateSemestre/{id}")
+    public Section updateSemestre(@PathVariable int id, @RequestBody Section updatedSection) {
+        return sectionService.updateSemestre(id, updatedSection);
+    }
 
     @DeleteMapping("/{id}")
     public void deleteSection(@PathVariable int id) {
