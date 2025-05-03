@@ -18,6 +18,7 @@ import com.EvalTrack.Entities.Section;
 import com.EvalTrack.Repositories.EtudiantRepository;
 import com.EvalTrack.Repositories.RoleRepository;
 import com.EvalTrack.Repositories.SectionRepository;
+import com.EvalTrack.Repositories.UserRepository;
 import com.EvalTrack.Security.JwtService;
 import com.EvalTrack.Security.PasswordGenerator;
 
@@ -27,15 +28,17 @@ public class EtudiantService {
 	private final SectionRepository sectionRepository; 
 	private final RoleRepository roleRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final UserRepository AdminRepository ;
 	
 	private final JwtService jwtS;
 	@Autowired
-	public EtudiantService(EtudiantRepository etudiantRepository, SectionRepository sectionRepository, PasswordEncoder passwordEncode,JwtService jwtS , RoleRepository roleRepository) {
+	public EtudiantService(EtudiantRepository etudiantRepository, SectionRepository sectionRepository, PasswordEncoder passwordEncode,JwtService jwtS , RoleRepository roleRepository,UserRepository AdminRepository ) {
 		this.etudiantRepository = etudiantRepository;
 		this.sectionRepository =sectionRepository;
 		this.roleRepository=roleRepository;
 		this.passwordEncoder = passwordEncode;
 		this.jwtS=jwtS;
+		this.AdminRepository= AdminRepository;
 	}
 	
 	//pour ceer un etudiant
@@ -150,6 +153,17 @@ public class EtudiantService {
 		{
 			return etudiantRepository.findByCin(Cin);
 		}
+		
+		public Optional<?> getUserByIdAndRole(Long idUser, int idRole) {
+		    if (idRole == 2) { // 1 = étudiant
+		        return etudiantRepository.findById(idUser);
+		    } else if (idRole == 1) { // 2 = administrateur
+		        return AdminRepository.findById(idUser);
+		    } else {
+		        return Optional.empty(); // rôle inconnu
+		    }
+		}
+
 
 
 

@@ -162,6 +162,15 @@ public class EtudiantController {
 	     }
 	 }
 
+	 @GetMapping("/{idUser}/{idRole}")
+	    public ResponseEntity<?> getUser(@PathVariable Long idUser, @PathVariable int idRole) {
+	        Optional<?> user = EtdService.getUserByIdAndRole(idUser, idRole);
 
+	        if (user.isPresent()) {
+	            return ResponseEntity.ok(user.get());
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
+	        }
+	    }
 	
 }
