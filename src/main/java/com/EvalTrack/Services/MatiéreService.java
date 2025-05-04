@@ -4,7 +4,7 @@ import com.EvalTrack.Entities.Etudiant;
 import com.EvalTrack.Entities.Matiére;
 import com.EvalTrack.Repositories.MatiereRepository;
 import com.EvalTrack.Repositories.ModuleRepository;
-
+import com.EvalTrack.Entities.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -68,26 +68,23 @@ public class MatiéreService {
         Optional<Matiére> optionalMatiere = matiereRepository.findById(id);
         if (optionalMatiere.isPresent()) {
             Matiére matiere = optionalMatiere.get();
+            
+            // Conserve le module existant
+            Module module = matiere.getModule();
+            
+            // Met à jour les autres champs
+            matiere.setNom(matiereDetails.getNom());
             matiere.setDescription(matiereDetails.getDescription());
             matiere.setCoefficient(matiereDetails.getCoefficient());
             matiere.setMoyenne(matiereDetails.getMoyenne());
             matiere.setPonderation(matiereDetails.getPonderation());
-            matiere.setEnseignant(matiereDetails.getEnseignant());
-            if (matiereDetails.getModule() != null) {
-                com.EvalTrack.Entities.Module module = moduleRepository.findById(matiere.getModule().getIdModule()).orElse(null);
-                matiere.setModule(module);
-            } else {
-            	 matiere.setModule(null);
-            }
-        	/*if (matiereDetails.getEnseignant() != null) {
-               com.EvalTrack.Entities.Enseignant ens = moduleRepository.findById(matiere.getModule().getIdModule()).orElse(null);
-                matiere.setModule(module);
-            } else {
-            	 matiere.setModule(null);
-            }*/
+            
+            // Réassigne le module original
+            matiere.setModule(module);
+            
             return matiereRepository.save(matiere);
         } else {
-            throw new RuntimeException("Matiére non trouvée avec l'ID : " + id);
+            throw new RuntimeException("Matière non trouvée avec l'ID : " + id);
         }
     }
 

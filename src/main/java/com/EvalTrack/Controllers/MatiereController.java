@@ -46,18 +46,18 @@ public class MatiereController {
 
     // Modifier une matière existante
     @PutMapping("/{id}")
-    public Matiére updateMatiere(@PathVariable Integer id, @RequestBody Matiére matiereDetails) {
+    public Matiére updateMatiere(@PathVariable("id") Integer id, @RequestBody Matiére matiereDetails) {
         return matiereservice.updateMatiere(id, matiereDetails);
     }
 
     // Supprimer une matière
     @DeleteMapping("/{id}")
-    public void deleteMatiere(@PathVariable Integer id) {
+    public void deleteMatiere(@PathVariable("id") Integer id) {
         matiereservice.deleteMatiere(id);
     }
     
     @GetMapping("/module/{idModule}")
-    public List<Matiére> getMatiereByIdModule(@PathVariable Integer idModule) {
+    public List<Matiére> getMatiereByIdModule(@PathVariable("idModule") Integer idModule) {
         return  matiereservice.getMatiereByIdModule(idModule);
     }
     

@@ -69,7 +69,7 @@ public class ModuleController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteModule(@PathVariable int id) {
+    public void deleteModule(@PathVariable("id") int id) {
         moduleService.deleteModule(id);
     }
     @GetMapping("/by-section/{idSection}/{semestre}")
