@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,5 +74,23 @@ public class ExamenController {
     public Examen updateExam(@PathVariable int id, @RequestBody Examen updatedExam) {
         return examService.updateExam(id, updatedExam);
     }
+    @PutMapping("/update-note/{cinEtudiant}/{idMatiere}/{typeExam}/{note}/{session}")
+    public ResponseEntity<Examen> updateNote(
+            @PathVariable int cinEtudiant,
+            @PathVariable int idMatiere,
+            @PathVariable String typeExam,
+            @PathVariable Double note,
+            @PathVariable String session) {
+        
+        Examen examen = examService.updateNote(cinEtudiant, idMatiere, typeExam, note, session);
+        
+        if (examen != null) {
+            return ResponseEntity.ok(examen); // 200 OK avec l'objet
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
+    }
+
+
 	
 }

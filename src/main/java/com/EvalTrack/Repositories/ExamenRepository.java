@@ -19,4 +19,6 @@ public interface ExamenRepository extends JpaRepository<Examen, Integer> {
     List<Examen> findByMatiereId(@Param("matiereId") int matiereId);
 	
 	List<Examen> findByTypeExam(String type);
+	
+	Examen findByEtudiantIdAndMatiere_MatiereIdAndTypeExamAndSession(Long etudiantId,int matiereId,String type,String session);
 }

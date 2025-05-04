@@ -99,6 +99,30 @@ public class ExamenService {
         } else {
             return null; 
         }
+        
+    }
+    
+    public Examen updateNote(int cinEtudiant,int idMatiere ,String typeExam,Double note,String session)
+    {
+    	Optional<Etudiant> etd = etudiantRepository.findByCin(cinEtudiant);
+    	System.out.println(etd.toString());
+
+    	if(etd.get().getId()!=0)
+    	{
+    		Examen examen = examenRepo.findByEtudiantIdAndMatiere_MatiereIdAndTypeExamAndSession(etd.get().getId(), idMatiere, typeExam, session);
+    		//System.out.println(examen.toString());
+    		if(examen!=null)
+    		{
+    			examen.setNotes(note);
+    			 return examenRepo.save(examen);
+    		}else
+    		{
+    			return null;
+    		}
+    	}else
+    	{
+    		return null;
+    	}
     }
 	
 }
