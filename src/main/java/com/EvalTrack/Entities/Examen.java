@@ -3,6 +3,7 @@ package com.EvalTrack.Entities;
 import jakarta.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,31 +15,34 @@ import jakarta.persistence.Table;
 @Entity
 @Table(
 	    uniqueConstraints = @UniqueConstraint(
-	        columnNames = {"idEtudinat", "matiereId", "typeExam", "session"}
+	        columnNames = {"id_etudinat", "matiere_id", "type_exam", "session"}
 	    )
 	)
-public class Examen {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idExam;
-    
-    private String typeExam;
+	public class Examen {
 
-    private Double notes;
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "id_exam")
+	    private int idExam;
 
-    private String lienCopie;
-    private String session;
+	    @Column(name = "type_exam")
+	    private String typeExam;
 
-    // Relation avec Matiere (Un examen appartient à une seule matière)
-    @ManyToOne
-    @JoinColumn(name = "matiereId") //pour le moment nulle
-    private Matiére matiere;
+	    private Double notes;
 
-    // Relation avec Etudiant (Un étudiant peut passer plusieurs examens)
-    
-    @ManyToOne
-    @JoinColumn(name = "idEtudinat")
-    private Etudiant etudiant;
+	    @Column(name = "lien_copie")
+	    private String lienCopie;
+
+	    @Column(name = "session")
+	    private String session;
+
+	    @ManyToOne
+	    @JoinColumn(name = "matiere_id")
+	    private Matiére matiere;
+
+	    @ManyToOne
+	    @JoinColumn(name = "id_etudinat")
+	    private Etudiant etudiant;
 
 	public Examen(int idExam, String typeExam, Double notes, String lienCopie, Matiére matiere, Etudiant etudiant,String session) {
 		super();

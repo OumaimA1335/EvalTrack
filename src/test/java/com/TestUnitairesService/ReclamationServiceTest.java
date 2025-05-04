@@ -39,7 +39,7 @@ public class ReclamationServiceTest {
         reclamation.setDateCreation(LocalDateTime.now());
         reclamation.setNomProf("Professeur X");
         reclamation.setMatiereConcerne("Mathématiques");
-        reclamation.setEmailEtudiant("etudiant@example.com");
+       
     }
 
     @Test

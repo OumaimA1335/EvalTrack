@@ -60,7 +60,6 @@ public class ReclamationService {
             reclamation.setDateResolution(reclamationDetails.getDateResolution());
             reclamation.setNomProf(reclamationDetails.getNomProf());
             reclamation.setMatiereConcerne(reclamationDetails.getMatiereConcerne());
-            reclamation.setEmailEtudiant(reclamationDetails.getEmailEtudiant());
             reclamation.setEtudiant(reclamationDetails.getEtudiant());
             reclamation.setAdministrateur(reclamationDetails.getAdministrateur());
 

@@ -33,7 +33,7 @@ public class Reclamation {
 
     private String nomProf;  // Nouveau champ pour le nom du professeur concerné
 
-    private String emailEtudiant;  // Nouveau champ pour l'email de l'étudiant concerné
+  
 
     @ManyToOne
     @JoinColumn(name = "id_etudiant", referencedColumnName = "idEtudinat")
@@ -48,7 +48,7 @@ public class Reclamation {
         this.statut = StatutReclamation.EN_COURS;  // Valeur par défaut du statut
     }
 
-    public Reclamation(Etudiant etudiant, Administrateur administrateur, TypeReclamation type, String matiereConcerne, String nomProf, String emailEtudiant) {
+    public Reclamation(Etudiant etudiant, Administrateur administrateur, TypeReclamation type, String matiereConcerne, String nomProf ) {
         this.etudiant = etudiant;
         this.administrateur = administrateur;
         this.type = type;
@@ -56,7 +56,7 @@ public class Reclamation {
         this.statut = StatutReclamation.EN_COURS;  // Valeur par défaut du statut
         this.matiereConcerne = matiereConcerne;
         this.nomProf = nomProf;
-        this.emailEtudiant = emailEtudiant;
+       
     }
 
     // Getters and Setters
@@ -126,14 +126,7 @@ public class Reclamation {
         this.nomProf = nomProf;
     }
 
-    public String getEmailEtudiant() {
-        return emailEtudiant;
-    }
-
-    public void setEmailEtudiant(String emailEtudiant) {
-        this.emailEtudiant = emailEtudiant;
-    }
-
+   
     public Etudiant getEtudiant() {
         return etudiant;
     }
