@@ -1,23 +1,33 @@
 package com.EvalTrack.Services;
 
+<<<<<<< HEAD
 import java.time.LocalDateTime;
+=======
+>>>>>>> origin/main
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.data.repository.CrudRepository;
+=======
+>>>>>>> origin/main
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.EvalTrack.Entities.Administrateur;
 import com.EvalTrack.Entities.Etudiant;
+<<<<<<< HEAD
 import com.EvalTrack.Entities.Reclamation;
 import com.EvalTrack.Entities.Role;
 import com.EvalTrack.Entities.StatutReclamation;
 import com.EvalTrack.Repositories.ReclamationRepository;
+=======
+import com.EvalTrack.Entities.Role;
+>>>>>>> origin/main
 import com.EvalTrack.Repositories.RoleRepository;
 import com.EvalTrack.Repositories.UserRepository;
 import com.EvalTrack.Security.JwtService;
@@ -30,6 +40,7 @@ public class AdministrateurService {
 	private final PasswordEncoder passwordEncoder;
 	private final RoleRepository roleRepository;
 	private final JwtService jwtS;
+<<<<<<< HEAD
 	private final ReclamationRepository reclamationRepository; 
     
 	 @Autowired
@@ -40,6 +51,16 @@ public class AdministrateurService {
 	        this.roleRepository = roleRepository;
 	        this.reclamationRepository = reclamationRepository;  // Injection de ReclamationRepository
 	    }
+=======
+    
+	@Autowired
+	public AdministrateurService(UserRepository userRepository, PasswordEncoder passwordEncode,JwtService jwtS,RoleRepository roleRepository) {
+		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncode;
+		this.jwtS=jwtS;
+		this.roleRepository=roleRepository;
+	}
+>>>>>>> origin/main
 	//pour ceer un administrateur
 	public Administrateur createAdministrateur(Administrateur admin)
 	{
@@ -121,6 +142,7 @@ public class AdministrateurService {
 	        throw new IllegalArgumentException("Administrateur non trouvé.");
 	    }
 	}
+<<<<<<< HEAD
 	
 	// Dans AdminService.java
 
@@ -170,5 +192,7 @@ public class AdministrateurService {
 
 
 
+=======
+>>>>>>> origin/main
 
 }

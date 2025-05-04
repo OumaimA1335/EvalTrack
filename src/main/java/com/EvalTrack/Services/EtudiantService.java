@@ -13,6 +13,7 @@ import com.EvalTrack.Entities.Administrateur;
 import com.EvalTrack.Entities.Etudiant;
 import com.EvalTrack.Entities.Examen;
 import com.EvalTrack.Entities.Matiére;
+<<<<<<< HEAD
 import com.EvalTrack.Entities.Reclamation;
 import com.EvalTrack.Entities.Role;
 import com.EvalTrack.Entities.Section;
@@ -20,6 +21,14 @@ import com.EvalTrack.Repositories.EtudiantRepository;
 import com.EvalTrack.Repositories.ReclamationRepository;
 import com.EvalTrack.Repositories.RoleRepository;
 import com.EvalTrack.Repositories.SectionRepository;
+=======
+import com.EvalTrack.Entities.Role;
+import com.EvalTrack.Entities.Section;
+import com.EvalTrack.Repositories.EtudiantRepository;
+import com.EvalTrack.Repositories.RoleRepository;
+import com.EvalTrack.Repositories.SectionRepository;
+import com.EvalTrack.Repositories.UserRepository;
+>>>>>>> origin/main
 import com.EvalTrack.Security.JwtService;
 import com.EvalTrack.Security.PasswordGenerator;
 
@@ -29,17 +38,29 @@ public class EtudiantService {
 	private final SectionRepository sectionRepository; 
 	private final RoleRepository roleRepository;
 	private final PasswordEncoder passwordEncoder;
+<<<<<<< HEAD
 	private final ReclamationRepository reclamationRepository;
 	
 	private final JwtService jwtS;
 	@Autowired
 	public EtudiantService(EtudiantRepository etudiantRepository, SectionRepository sectionRepository, PasswordEncoder passwordEncode,JwtService jwtS , RoleRepository roleRepository, ReclamationRepository reclamationRepository) {
+=======
+	private final UserRepository AdminRepository ;
+	
+	private final JwtService jwtS;
+	@Autowired
+	public EtudiantService(EtudiantRepository etudiantRepository, SectionRepository sectionRepository, PasswordEncoder passwordEncode,JwtService jwtS , RoleRepository roleRepository,UserRepository AdminRepository ) {
+>>>>>>> origin/main
 		this.etudiantRepository = etudiantRepository;
 		this.sectionRepository =sectionRepository;
 		this.roleRepository=roleRepository;
 		this.passwordEncoder = passwordEncode;
 		this.jwtS=jwtS;
+<<<<<<< HEAD
 		this.reclamationRepository = reclamationRepository;
+=======
+		this.AdminRepository= AdminRepository;
+>>>>>>> origin/main
 	}
 	
 	//pour ceer un etudiant
@@ -154,6 +175,7 @@ public class EtudiantService {
 		{
 			return etudiantRepository.findByCin(Cin);
 		}
+<<<<<<< HEAD
 
 		public Reclamation addReclamation(Long etudiantId, Reclamation reclamation) {
 		    // Vérifier si l'étudiant existe
@@ -169,5 +191,22 @@ public class EtudiantService {
 		}
 
 
+=======
+		
+		public Optional<?> getUserByIdAndRole(Long idUser, int idRole) {
+		    if (idRole == 2) { // 1 = étudiant
+		        return etudiantRepository.findById(idUser);
+		    } else if (idRole == 1) { // 2 = administrateur
+		        return AdminRepository.findById(idUser);
+		    } else {
+		        return Optional.empty(); // rôle inconnu
+		    }
+		}
+
+
+
+
+
+>>>>>>> origin/main
 		 
 }
