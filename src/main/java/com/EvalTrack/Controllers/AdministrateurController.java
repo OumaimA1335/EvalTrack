@@ -11,14 +11,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.EvalTrack.Entities.Administrateur;
 import com.EvalTrack.Entities.Etudiant;
+import com.EvalTrack.Entities.Reclamation;
+import com.EvalTrack.Entities.StatutReclamation;
 import com.EvalTrack.Services.AdministrateurService;
 
 @RestController
@@ -70,6 +75,28 @@ public class AdministrateurController {
 	    public Optional<Administrateur> getAdmin(@PathVariable Long id) {
 	        return adminService.getAdminById(id);
 	    }
+	  
+	  @PutMapping("/reclamation/{idReclamation}/statut")
+	    public Reclamation changeStatutReclamation(@PathVariable Long idReclamation, @RequestBody StatutReclamation nouveauStatut) {
+	        return adminService.changeStatutReclamation(idReclamation, nouveauStatut);
+	    }
+	  @GetMapping("/reclamations")
+	    public List<Reclamation> getAllReclamations() {
+	        return adminService.getAllReclamations();
+	    }
+
+	    // Récupérer les réclamations par statut
+	    @GetMapping("/reclamations/statut")
+	    public List<Reclamation> getReclamationsByStatut(@RequestParam StatutReclamation statut) {
+	        return adminService.getReclamationsByStatut(statut);
+	    }
+	 // Mettre à jour le statut de la réclamation (par exemple, changer de "EN_COURS" à "TRAITÉE")
+	    @PutMapping("/reclamations/{idReclamation}/statut")
+	    public Reclamation updateStatutReclamation(@PathVariable Long idReclamation, 
+	                                                @RequestParam StatutReclamation nouveauStatut) {
+	        return adminService.updateStatutReclamation(idReclamation, nouveauStatut);
+	    }
+
 }
 
 

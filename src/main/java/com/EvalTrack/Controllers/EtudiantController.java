@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.EvalTrack.Entities.Administrateur;
 import com.EvalTrack.Entities.Etudiant;
+import com.EvalTrack.Entities.Reclamation;
 import com.EvalTrack.Services.AdministrateurService;
 import com.EvalTrack.Services.EmailService;
 import com.EvalTrack.Services.EtudiantService;
@@ -160,6 +161,11 @@ public class EtudiantController {
 	     } catch (Exception e) {
 	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la mise à jour du mot de passe.");
 	     }
+	 }
+	 
+	 @PostMapping("/reclamation")
+	 public Reclamation addReclamation(@RequestParam Long etudiantId, @RequestBody Reclamation reclamation) {
+	     return EtdService.addReclamation(etudiantId, reclamation);
 	 }
 
 	 @GetMapping("/{idUser}/{idRole}")
