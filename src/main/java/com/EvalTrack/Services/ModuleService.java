@@ -2,7 +2,7 @@ package com.EvalTrack.Services;
 
 import com.EvalTrack.Entities.Matiére;
 import com.EvalTrack.Entities.Module;
-import com.EvalTrack.Entities.ModuleWithMatieresDTO;
+import com.EvalTrack.DTOs.ModuleWithMatieresDTO;
 import com.EvalTrack.Repositories.MatiereRepository;
 import com.EvalTrack.Repositories.ModuleRepository;
 import com.EvalTrack.Repositories.SectionRepository;
@@ -46,23 +46,38 @@ public class ModuleService {
 
         return moduleRepository.save(module);
     }
-
-    public Module updateModule(int id, Module updatedModule) {
-        return moduleRepository.findById(id).map(module -> {
-            module.setNomModule(updatedModule.getNomModule());
-            module.setMoyenne(updatedModule.getMoyenne());
-        	module.setSemestre(updatedModule.getSemestre());
-        	module.setCoefModule(updatedModule.getCoefModule());
-            if (updatedModule.getSection() != null) {
-                com.EvalTrack.Entities.Section section = sectionRepository.findById(module.getSection().getIdSection()).orElse(null);
-                module.setSection(section);
-            } else {
-            	module.setSection(null);
+    
+    
+    public Module addModuleWithMatieres(Module module, List<Matiére> matieres) {
+        // Save module first
+        Module savedModule = moduleRepository.save(module);
+        
+        // Then save each matiere
+        for (Matiére matiere : matieres) {
+            try {
+                matiere.setModule(savedModule);
+                matiereRepository.save(matiere);
+            } catch (Exception e) {
+                // If saving matiere fails, delete the module to maintain consistency
+                moduleRepository.delete(savedModule);
+                throw new RuntimeException("Failed to save matiere: " + matiere.getNom() + 
+                                       ". Error: " + e.getMessage());
             }
-            return moduleRepository.save(module);
-        }).orElse(null);
+        }
+        return savedModule;
     }
-
+    
+    public Module updateModule(int id, Module updatedModule) {
+        return moduleRepository.findById(id)
+            .map(module -> {
+                // Copie sélective des champs
+                module.setNomModule(updatedModule.getNomModule());
+                module.setSemestre(updatedModule.getSemestre());
+                module.setCoefModule(updatedModule.getCoefModule());
+                return moduleRepository.save(module);
+            })
+            .orElseThrow(() -> new RuntimeException("Module non trouvé"));
+    }
     public void deleteModule(int id) {
         moduleRepository.deleteById(id);
     }
@@ -82,5 +97,10 @@ public class ModuleService {
 
         return result;
     }
+    
+    public List<Module> findBySectionAndSemestreWithMatieres(Long idSection, Long semestre) {
+        return moduleRepository.findBySection_SectionIdAndSemestre(idSection, semestre);
+    }
+    
 
 }

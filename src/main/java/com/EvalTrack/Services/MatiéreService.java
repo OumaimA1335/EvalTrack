@@ -45,6 +45,13 @@ public class MatiéreService {
         return matiereRepository.save(mat);
         
     }
+    
+    public Matiére addMatiereToModule(Matiére matiere, int moduleId) {
+        com.EvalTrack.Entities.Module module = moduleRepository.findById(moduleId)
+                .orElseThrow(() -> new RuntimeException("Module non trouvé"));
+        matiere.setModule(module);
+        return matiereRepository.save(matiere);
+    }
 
     // Récupérer toutes les matières
     public List<Matiére> getAllMatieres() {

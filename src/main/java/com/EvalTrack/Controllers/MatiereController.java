@@ -26,7 +26,7 @@ public class MatiereController {
 
     // Récupérer une matière par ID
     @GetMapping("/{id}")
-    public Optional<Matiére> getMatiereById(@PathVariable Integer id) {
+    public Optional<Matiére> getMatiereById(@PathVariable("id") Integer id) {
         return matiereservice.getMatiereById(id);
     }
 
@@ -34,6 +34,14 @@ public class MatiereController {
     @PostMapping
     public Matiére createMatiere(@RequestBody Matiére matiere) {
       return  matiereservice.ajouterMatiere(matiere);
+    }
+    
+    @PostMapping("/for-module/{moduleId}")
+    public Matiére addMatiereToModule(@PathVariable("moduleId") int moduleId, @RequestBody Matiére matiere) {
+    	 if (matiere.getNom() == null || matiere.getNom().isEmpty()) {
+    	        throw new IllegalArgumentException("Le nom de la matière est obligatoire");
+    	    }
+    	return matiereservice.addMatiereToModule(matiere, moduleId);
     }
 
     // Modifier une matière existante
