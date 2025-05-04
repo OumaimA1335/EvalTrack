@@ -125,7 +125,7 @@ public class ModuleServiceTest {
         when(moduleRepository.findBySection_SectionIdAndSemestre(1L, 1L)).thenReturn(List.of(module));
         when(matiereRepository.findByModule_IdModule(module.getIdModule())).thenReturn(List.of(new Matiére()));
 
-        List<ModuleWithMatieresDTO> modulesWithMatieres = moduleService.getModulesAndMatieres(1L, 1L);
+        List<com.EvalTrack.DTOs.ModuleWithMatieresDTO> modulesWithMatieres = moduleService.getModulesAndMatieres(1L, 1L);
 
         assertNotNull(modulesWithMatieres);
         assertEquals(1, modulesWithMatieres.size());
