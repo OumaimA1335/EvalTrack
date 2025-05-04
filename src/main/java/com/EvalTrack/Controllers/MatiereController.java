@@ -26,7 +26,7 @@ public class MatiereController {
 
     // Récupérer une matière par ID
     @GetMapping("/{id}")
-    public Optional<Matiére> getMatiereById(@PathVariable Integer id) {
+    public Optional<Matiére> getMatiereById(@PathVariable("id") Integer id) {
         return matiereservice.getMatiereById(id);
     }
 
@@ -35,21 +35,29 @@ public class MatiereController {
     public Matiére createMatiere(@RequestBody Matiére matiere) {
       return  matiereservice.ajouterMatiere(matiere);
     }
+    
+    @PostMapping("/for-module/{moduleId}")
+    public Matiére addMatiereToModule(@PathVariable("moduleId") int moduleId, @RequestBody Matiére matiere) {
+    	 if (matiere.getNom() == null || matiere.getNom().isEmpty()) {
+    	        throw new IllegalArgumentException("Le nom de la matière est obligatoire");
+    	    }
+    	return matiereservice.addMatiereToModule(matiere, moduleId);
+    }
 
     // Modifier une matière existante
     @PutMapping("/{id}")
-    public Matiére updateMatiere(@PathVariable Integer id, @RequestBody Matiére matiereDetails) {
+    public Matiére updateMatiere(@PathVariable("id") Integer id, @RequestBody Matiére matiereDetails) {
         return matiereservice.updateMatiere(id, matiereDetails);
     }
 
     // Supprimer une matière
     @DeleteMapping("/{id}")
-    public void deleteMatiere(@PathVariable Integer id) {
+    public void deleteMatiere(@PathVariable("id") Integer id) {
         matiereservice.deleteMatiere(id);
     }
     
     @GetMapping("/module/{idModule}")
-    public List<Matiére> getMatiereByIdModule(@PathVariable Integer idModule) {
+    public List<Matiére> getMatiereByIdModule(@PathVariable("idModule") Integer idModule) {
         return  matiereservice.getMatiereByIdModule(idModule);
     }
     
