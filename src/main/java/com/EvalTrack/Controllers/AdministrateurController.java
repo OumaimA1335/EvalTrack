@@ -11,26 +11,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-=======
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
->>>>>>> origin/main
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.EvalTrack.Entities.Administrateur;
 import com.EvalTrack.Entities.Etudiant;
-<<<<<<< HEAD
 import com.EvalTrack.Entities.Reclamation;
 import com.EvalTrack.Entities.StatutReclamation;
-=======
->>>>>>> origin/main
 import com.EvalTrack.Services.AdministrateurService;
 
 @RestController
@@ -82,7 +75,6 @@ public class AdministrateurController {
 	    public Optional<Administrateur> getAdmin(@PathVariable Long id) {
 	        return adminService.getAdminById(id);
 	    }
-<<<<<<< HEAD
 	  
 	  @PutMapping("/reclamation/{idReclamation}/statut")
 	    public Reclamation changeStatutReclamation(@PathVariable Long idReclamation, @RequestBody StatutReclamation nouveauStatut) {
@@ -105,9 +97,6 @@ public class AdministrateurController {
 	        return adminService.updateStatutReclamation(idReclamation, nouveauStatut);
 	    }
 
-	  
-=======
->>>>>>> origin/main
 }
 
 

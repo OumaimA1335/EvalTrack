@@ -149,4 +149,14 @@ public class Reclamation {
     public void setAdministrateur(Administrateur administrateur) {
         this.administrateur = administrateur;
     }
+
+	public void setId(long l) {
+		this.idReclamation=l;
+		
+	}
+
+	public Long getId() {
+		
+		return this.idReclamation;
+	}
 }

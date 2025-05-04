@@ -53,6 +53,10 @@ public class Enseignant extends Utilisateur {
 	public void setMatieres(List<Matiére> matieres) {
 		this.matieres = matieres;
 	}
+
+	public void setId(Integer l) {
+		this.enseignantId=l;
+	}
 	
 
 }

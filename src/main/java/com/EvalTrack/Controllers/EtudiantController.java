@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.EvalTrack.Entities.Administrateur;
 import com.EvalTrack.Entities.Etudiant;
-<<<<<<< HEAD
 import com.EvalTrack.Entities.Reclamation;
-=======
->>>>>>> origin/main
 import com.EvalTrack.Services.AdministrateurService;
 import com.EvalTrack.Services.EmailService;
 import com.EvalTrack.Services.EtudiantService;
@@ -165,15 +162,11 @@ public class EtudiantController {
 	         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la mise à jour du mot de passe.");
 	     }
 	 }
-<<<<<<< HEAD
 	 
 	 @PostMapping("/reclamation")
 	 public Reclamation addReclamation(@RequestParam Long etudiantId, @RequestBody Reclamation reclamation) {
 	     return EtdService.addReclamation(etudiantId, reclamation);
 	 }
-
-
-=======
 
 	 @GetMapping("/{idUser}/{idRole}")
 	    public ResponseEntity<?> getUser(@PathVariable Long idUser, @PathVariable int idRole) {
@@ -185,6 +178,5 @@ public class EtudiantController {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
 	        }
 	    }
->>>>>>> origin/main
 	
 }
