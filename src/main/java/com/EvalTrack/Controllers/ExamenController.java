@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,10 +59,16 @@ public class ExamenController {
         return examService.findByType(type);
     }
     @PostMapping
-    public Examen createExam(@RequestBody Examen examen) {
-       
-        return examService.saveExam(examen);
+    public ResponseEntity<?> createExam(@RequestBody Examen examen) {
+        Examen savedExam = examService.saveExam(examen);
+        
+        if (savedExam != null) {
+            return ResponseEntity.ok(examen); // 200 OK avec l'objet
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
     }
+
 
 
 

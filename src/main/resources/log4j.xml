@@ -11,7 +11,7 @@
   <appender name="fichierLog" class="org.apache.log4j.RollingFileAppender">
     <param name="maxFileSize" value="1024KB" />
     <param name="maxBackupIndex" value="5" />
-    <param name="File" value="G:/COURS/Spring 2021-2022/Journalisation/p2-demo-log4j.log" />
+    <param name="File" value="D:\Program Files\WorkSpace Spring Boot\EvalTrack\Journalisation/p2-demo-log4j.log" />
     <param name="threshold" value="info" />
     <layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-8p [%t]:%C - %m%n" />
@@ -21,7 +21,7 @@
   <appender name="fichierDebug" class="org.apache.log4j.RollingFileAppender">
     <param name="maxFileSize" value="10MB" />
     <param name="maxBackupIndex" value="2" />
-    <param name="File" value="G:/COURS/Spring 2021-2022/Journalisation/p2-demo-log4j_debug.log" />
+    <param name="File" value="D:\Program Files\WorkSpace Spring Boot\EvalTrack\Journalisation/p2-demo-log4j_debug.log" />
     <layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-8p [%t]:%C - %m%n" />
     </layout>

@@ -38,6 +38,7 @@ import jakarta.persistence.Table;
 
 	    @ManyToOne
 	    @JoinColumn(name = "matiere_id")
+	    
 	    private Matiére matiere;
 
 	    @ManyToOne

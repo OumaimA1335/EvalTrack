@@ -37,6 +37,9 @@ public class ExamenService {
     }
 
     public Examen saveExam(Examen newExam) {
+    	Examen examen = examenRepo.findByEtudiantIdAndMatiere_MatiereIdAndTypeExamAndSession(newExam.getEtudiant().getId(), newExam.getMatiere().getMatiereId(), newExam.getTypeExam(), newExam.getSession());
+    	if(examen==null)
+    	{
     	  Examen exam = new Examen();
           exam.setTypeExam(newExam.getTypeExam());
           exam.setNotes(newExam.getNotes());
@@ -59,6 +62,10 @@ public class ExamenService {
           }
 
           return examenRepo.save(exam);
+    	}else
+    	{
+    		return null;
+    	}
       }
     
     

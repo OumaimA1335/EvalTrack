@@ -87,10 +87,12 @@ public class ModuleService {
     	return moduleRepository.findBySection_SectionIdAndSemestre(idSection,semestre);
     }
     public List<ModuleWithMatieresDTO> getModulesAndMatieres(Long idSection, Long semestre) {
+    
         List<Module> modules = moduleRepository.findBySection_SectionIdAndSemestre(idSection, semestre);
         List<ModuleWithMatieresDTO> result = new ArrayList<>();
-
+    
         for (Module module : modules) {
+        
             List<Matiére> matieres = matiereRepository.findByModule_IdModule(module.getIdModule());
             result.add(new ModuleWithMatieresDTO(module, matieres));
         }

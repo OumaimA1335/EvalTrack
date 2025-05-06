@@ -19,7 +19,7 @@ public class Module {
     private float coefModule;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL)
     private List<Matiére> listeMatieres;
     
     

@@ -78,6 +78,12 @@ public class ModuleController {
             @PathVariable("semestre") Long semestre) {
         return moduleService.getlistModule(idSection, semestre);
     }
+    @GetMapping("/matieres/{idSection}/{semestre}")
+    public List<ModuleWithMatieresDTO> getMatieres(
+            @PathVariable("idSection") Long idSection, 
+            @PathVariable("semestre") Long semestre) {
+        return moduleService.getModulesAndMatieres(idSection, semestre);
+    }
     
     @GetMapping("/section/{idSection}/semestre/{semestre}")
     public ResponseEntity<List<Module>> getModulesWithMatieres(
